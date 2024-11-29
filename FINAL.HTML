@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .background-image {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .seat {
+            transition: all 0.3s ease;
+        }
+        .seat.selected {
+            background-color: #1E3A8A;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="text-white bg-gray-900 relative">
+
+<!-- Navigation Bar -->
+<nav class="bg-gray-800 p-4 fixed w-full z-10">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold text-white">Movie Booking</a>
+        <div id="nav-links">
+            <button onclick="showSection('home')" class="text-white px-3 py-2 rounded hover:bg-gray-700">Home</button>
+            <button onclick="showSection('booking')" class="text-white px-3 py-2 rounded hover:bg-gray-700">Booking</button>
+            <button onclick="showSection('payment')" class="text-white px-3 py-2 rounded hover:bg-gray-700">Payment</button>
+        </div>
+    </div>
+</nav>
+
+<!-- Add top padding to prevent overlap with fixed navbar -->
+<div class="pt-16"></div>
+
+<!-- Home Section -->
+<section id="home" class="section active background-image" style="background-image: url('C:\Users\Kiran Belagali\Downloads\HOME BACKGROUND.jpg');">
+    <div class="overlay"></div>
+    <div class="container mx-auto py-16 relative z-10">
+        <h1 class="text-4xl font-bold text-center mb-12">Choose Your Movie</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white text-gray-900 shadow-lg rounded-lg p-4">
+                <img src="C:\Users\Kiran Belagali\Downloads\jigra-movie-by-alia-bhatt-productions.jpg" alt="Movie Poster 1" class="w-full h-64 object-cover rounded-md">
+                <h2 class="text-xl font-semibold mt-4">JIGRA</h2>
+                <button onclick="showMovieDetails(1)" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded-md">Book Now</button>
+            </div>
+            <div class="bg-white text-gray-900 shadow-lg rounded-lg p-4">
+                <img src="C:\Users\Kiran Belagali\Downloads\maxmovie.jpg"  alt="Movie Poster 2"class="w-full h-64 object-cover rounded-md">
+                <h2 class="text-xl font-semibold mt-4">MAX</h2>
+                <button onclick="showMovieDetails(2)" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded-md">Book Now</button>
+            </div>
+            <div class="bg-white text-gray-900 shadow-lg rounded-lg p-4">
+                <img src="C:\Users\Kiran Belagali\Downloads\maxresdefault.jpg" alt="Movie Poster 3" class="w-full h-64 object-cover rounded-md">
+                <h2 class="text-xl font-semibold mt-4">BHOOL BHULAIYAA 3</h2>
+                <button onclick="showMovieDetails(3)" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded-md">Book Now</button>
+            </div>
+            
+          
+          
+
+        </div>
+    </div>
+</section>
+
+<!-- Movie Details Section -->
+<section id="movie-details" class="section hidden">
+    <div class="overlay"></div>
+    <div class="container mx-auto py-16 relative z-10">
+        <h1 id="movie-title" class="text-3xl font-bold mb-4"></h1>
+        <p id="movie-description" class="text-lg"></p>
+        <button onclick="showSection('booking')" class="mt-4 px-4 py-2 bg-green-500 text-white rounded-md">Proceed to Booking</button>
+    </div>
+</section>
+
+<!-- Booking Section -->
+<section id="booking" class="section background-image" style="background-image: url('C:\Users\Kiran Belagali\Downloads\HOME BACKGROUND.jpg');">
+    <div class="overlay"></div>
+    <div class="container mx-auto py-16 relative z-10">
+        <div class="bg-white text-gray-900 shadow-lg rounded-lg p-6">
+            <h1 class="text-3xl font-bold">Select Your Seats</h1>
+            <div class="grid grid-cols-5 gap-4 mt-4">
+                <!-- Seat Rows -->
+                <div class="flex flex-col" id="row-A">
+                    <span class="text-center">A</span>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'A1')">1</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'A2')">2</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'A3')">3</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'A4')">4</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'A5')">5</button>
+                </div>
+                <!-- Repeat for other rows B to E -->
+                <div class="flex flex-col" id="row-B">
+                    <span class="text-center">B</span>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'B1')">1</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'B2')">2</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'B3')">3</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'B4')">4</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'B5')">5</button>
+                </div>
+ <div class="flex flex-col" id="row-C">
+                    <span class="text-center">C</span>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'C1')">1</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'C2')">2</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'C3')">3</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'C4')">4</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'C5')">5</button>
+                </div>
+ <div class="flex flex-col" id="row-D">
+                    <span class="text-center">D</span>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'D1')">1</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'D2')">2</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'D3')">3</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'D4')">4</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'D5')">5</button>
+                </div>
+ <div class="flex flex-col" id="row-E">
+                    <span class="text-center">E</span>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'E1')">1</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'E2')">2</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'E3')">3</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'E4')">4</button>
+                    <button class="seat bg-gray-300 p-2 rounded-md" onclick="toggleSeat(this, 'E5')">5</button>
+                </div>
+ 
+                <!-- Repeat for C, D, E -->
+            </div>
+            <p class="mt-4">Total Tickets: <span id="total-tickets">0</span></p>
+            <p>Total Amount: ₹<span id="total-amount">0.00</span></p>
+            <button onclick="requestCustomerDetails()" class="px-4 py-2 bg-green-500 text-white rounded-md mt-6">Proceed to Payment</button>
+        </div>
+    </div>
+</section>
+
+<!-- Payment Section -->
+<section id="payment" class="section background-image" style="background-image: url('payment-background.jpg');">
+    <div class="overlay"></div>
+    <div class="container mx-auto py-16 relative z-10">
+        <div class="bg-white text-gray-900 shadow-lg rounded-lg p-6">
+            <h1 class="text-3xl font-bold">Payment Method</h1>
+            <div class="mt-6">
+                <button onclick="showCardPayment()" class="w-full py-2 bg-blue-500 text-white rounded-md mb-4">Card Payment</button>
+                <button onclick="showPhonePePayment()" class="w-full py-2 bg-purple-500 text-white rounded-md mb-4">PhonePe Payment</button>
+            </div>
+            <div id="card-payment" class="payment-form mt-6 hidden">
+                <label class="block mb-2">Card Number</label>
+                <input type="text" class="w-full p-2 border border-gray-300 rounded-md mb-4" placeholder="XXXX XXXX XXXX XXXX">
+                <label class="block mb-2">Expiry Date</label>
+                <input type="text" class="w-full p-2 border border-gray-300 rounded-md mb-4" placeholder="MM/YY">
+                <label class="block mb-2">CVV</label>
+                <input type="text" class="w-full p-2 border border-gray-300 rounded-md mb-4" placeholder="CVV">
+                <button onclick="confirmBooking()" class="w-full py-2 bg-green-500 text-white rounded-md">Confirm Payment</button>
+            </div>
+            <div id="phonepe-payment" class="payment-form mt-6 hidden">
+                <p>Scan the QR code to complete the payment.</p>
+                <img src="C:\Users\Kiran Belagali\OneDrive\Pictures\SCANNER.jpeg" alt="QR Code" class="w-500 h-500 object-cover rounded-md">
+                <button onclick="confirmBooking()" class="w-full py-2 bg-green-500 text-white rounded-md mt-6">Confirm Payment</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Booking Confirmation -->
+<section id="booking-confirmation" class="section hidden">
+    <div class="overlay"></div>
+    <div class="container mx-auto py-16 relative z-10">
+        <div class="bg-white text-gray-900 shadow-lg rounded-lg p-6">
+            <h1 class="text-3xl font-bold">Booking Confirmed</h1>
+            <p id="confirmation-details" class="mt-4 text-lg"></p>
+            <button onclick="showSection('home')" class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md">Back to Home</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    const ticketPrice = 150;
+    let selectedSeats = [];
+    let customerDetails = {};
+
+    const movies = [
+        { id: 1, title: "JIGRA", description: "Directed by Vasan Bala. With Alia Bhatt, Vedang Raina, Akansha Ranjan Kapoor..." },
+        { id: 2, title: "MAX", description: "Kichcha Sudeep as Arjun Mahakshay reports to duty at a new police station..." },
+        { id: 3, title: "BHOOL BHULAIYAA 3", description: "Kartik Aaryan as Ruhan Randhawa ventures into a haunted mansion..." },
+        
+    ];
+
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    function showMovieDetails(movieId) {
+        const movie = movies.find(m => m.id === movieId);
+        document.getElementById('movie-title').innerText = movie.title;
+        document.getElementById('movie-description').innerText = movie.description;
+        showSection('movie-details');
+    }
+
+    function toggleSeat(button, seatId) {
+        button.classList.toggle('selected');
+        if (selectedSeats.includes(seatId)) {
+            selectedSeats = selectedSeats.filter(seat => seat !== seatId);
+        } else {
+            selectedSeats.push(seatId);
+        }
+        updateTicketInfo();
+    }
+
+    function updateTicketInfo() {
+        document.getElementById('total-tickets').innerText = selectedSeats.length;
+        document.getElementById('total-amount').innerText = (selectedSeats.length * ticketPrice).toFixed(2);
+    }
+
+    function requestCustomerDetails() {
+        const name = prompt("Enter your name:");
+        const contact = prompt("Enter your contact:");
+        if (name && contact) {
+            customerDetails = { name, contact };
+            showSection('payment');
+        } else {
+            alert("Please enter valid details.");
+        }
+    }
+
+    function confirmBooking() {
+        const confirmationMessage = `Booking confirmed for ${customerDetails.name} (${customerDetails.contact}).\nSeats: ${selectedSeats.join(', ')}`;
+        document.getElementById('confirmation-details').innerText = confirmationMessage;
+        showSection('booking-confirmation');
+    }
+
+    function showCardPayment() {
+        document.querySelectorAll('.payment-form').forEach(form => form.classList.add('hidden'));
+        document.getElementById('card-payment').classList.remove('hidden');
+    }
+
+    function showPhonePePayment() {
+        document.querySelectorAll('.payment-form').forEach(form => form.classList.add('hidden'));
+        document.getElementById('phonepe-payment').classList.remove('hidden');
+    }
+</script>
+</body>
+</html>
